@@ -35,5 +35,5 @@
     "src/redux/customer/product.js",
     "src/lib/location.tss"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

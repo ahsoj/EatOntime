@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { AppType, AppProps } from "next/app";
 import { useSessionStorage } from "usehooks-ts";
-import { ServerStyleSheets } from "@mui/styles";
+// import {  } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -50,7 +50,9 @@ export default function EmotionStyleRegistary({
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode: string) =>
+          prevMode === "light" ? "dark" : "light"
+        );
         setSessionTheme(mode === "light" ? "light" : "dark");
       },
     }),
@@ -72,7 +74,7 @@ export default function EmotionStyleRegistary({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Provider store={store}>
-          <SnackbarProvider>{children}</SnackbarProvider>
+            <SnackbarProvider>{children}</SnackbarProvider>
           </Provider>
         </ThemeProvider>
       </ColorModeContext.Provider>
@@ -86,7 +88,6 @@ EmotionStyleRegistary.getInitialProps = async (ctx: DocumentContext) => {
   // You can consider sharing the same Emotion cache between all the SSR requests to speed up performance.
   // However, be aware that it can have global side effects.
   const cache = createEmotionCache();
-  const sheets = new ServerStyleSheets();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>
@@ -94,8 +95,8 @@ EmotionStyleRegistary.getInitialProps = async (ctx: DocumentContext) => {
       enhanceApp: (
         App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>
       ) =>
-        function EnhanceApp(props) {
-          return sheets.collect(<App emotionCache={cache} {...props} />);
+        function EnhanceApp(props: any) {
+          return <App emotionCache={cache} {...props} />;
         },
     });
 
