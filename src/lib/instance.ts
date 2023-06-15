@@ -9,7 +9,7 @@ let authTokens = Cookies.get("token")
 
 // const isServer = typeof window === "undefined";
 
-const baseURL = "http://127.0.0.1:8888/api";
+const baseURL = "/api";
 
 // const useAxios = () => {
 const axiosInstance: AxiosInstance = axios.create({

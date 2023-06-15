@@ -1,4 +1,4 @@
-import { LatLngExpression, Layer } from "leaflet";
+import { LatLngExpression } from "leaflet";
 import { useState } from "react";
 import { MapContainer, Popup, Marker, useMapEvents } from "react-leaflet";
 import { TileLayer } from "react-leaflet";
@@ -40,8 +40,9 @@ function LocationMarker({ ...props }) {
     locationfound(e) {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
+      const A_KEY = process.env.A_KEY;
       fetch(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&apiKey=dca04a41cfb04353a490964e5fc16971`
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&apiKey=${A_KEY}`
       )
         .then((response) => response.json())
         .then((result) => {

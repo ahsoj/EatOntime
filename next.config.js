@@ -4,15 +4,16 @@ const API_URL = process.env.API_URL;
 
 const nextConfig = {
   async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${API_URL}/:path*`,
-      },
-    ];
+    return {
+      fallback: [
+        {
+          source: "/api/:path*",
+          destination: `http://${API_URL}/:path*`,
+        },
+      ],
+    };
   },
   reactStrictMode: false,
-  output: "export",
   typescript: {
     ignoreBuildErrors: true,
   },
